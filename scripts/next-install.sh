@@ -1,0 +1,1 @@
+rm -rf .next && npm ci && npm run build

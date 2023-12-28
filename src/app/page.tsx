@@ -7,7 +7,7 @@ export default function Home() {
       <Image src={facepalm}
         alt='facepalm'
       />
-      <p className='bg-slate-100 dark:bg-slate-900 p-4'>Well, hello there...</p>
+      <p className='bg-slate-100 dark:bg-slate-900 p-4'>Finally working</p>
 
     </main>
   )

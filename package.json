@@ -11,7 +11,9 @@
     "next-install": "sh ./scripts/next-install.sh"
   },
   "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.481.0",
     "next": "14.0.4",
+    "postgres": "^3.4.3",
     "react": "^18",
     "react-dom": "^18",
     "sharp": "^0.33.1"

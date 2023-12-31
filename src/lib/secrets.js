@@ -1,15 +1,16 @@
-export const dynamic = "force-dynamic";
-
 import {
   SecretsManagerClient,
   GetSecretValueCommand,
 } from "@aws-sdk/client-secrets-manager";
 
-export async function get_secret(secret_name, region) {
+export default async function get_DB_password() {
+  const secret_name = process.env.PGSQL_CREDENTIALS;
+  console.debug(secret_name)
+  const region = 'eu-west-1'
   const client = new SecretsManagerClient({
     region: region,
   });
-
+  console.debug(client)
   let response;
   try {
     response = await client.send(
@@ -24,6 +25,6 @@ export async function get_secret(secret_name, region) {
     console.error(error);
     return null;
   }
-
-  return response.SecretString;
+  const password = JSON.parse(response.SecretString).password
+  return password
 }

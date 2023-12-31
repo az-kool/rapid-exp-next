@@ -1,5 +1,5 @@
 import postgres from "postgres";
-import { get_secret } from "@/lib/secrets";
+import  get_DB_password  from "@/lib/secrets";
 
 const environment = process.env["NODE_ENV"];
 console.log("Environment: ", environment);
@@ -18,22 +18,27 @@ async function prepare_config() {
 
   if (environment == "production") {
     config.ssl = { rejectUnauthorized: false };
-    const secret = process.env.PGSQL_CREDENTIALS;
-    const creds = await get_secret(secret, "eu-west-1");
-    const creds_json = JSON.parse(creds);
-    config.user = creds_json?.username ?? "";
-    config.password = creds_json?.password ?? "";
+    // const secret = process.env.PGSQL_CREDENTIALS;
+    // const creds = await get_secret(secret, "eu-west-1");
+    // const creds_json = JSON.parse(creds);
+    // config.user = creds_json?.username ?? "";
+    config.password = async () => await get_DB_password()
   }
   return config
 }
+const config = await prepare_config()
+console.log(config)
+const sql = postgres(config)
 
-export async function get_sql() {
-    if (connection==null) {
-        console.debug('Creating DB connection')
-        const config = await prepare_config()
-        connection = postgres(config)
-    }
-    return connection
-}
+export default sql
+
+// export async function get_sql() {
+//     if (connection==null) {
+//         console.debug('Creating DB connection')
+//         const config = await prepare_config()
+//         connection = postgres(config)
+//     }
+//     return connection
+// }
 
 

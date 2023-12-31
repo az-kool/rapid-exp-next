@@ -1,10 +1,10 @@
 export const dynamic = 'force-dynamic'
 
 import { Invoice } from '@/lib/definitions'
-import { get_sql } from '@/lib/db.js'
+import  sql  from '@/lib/db.js'
 
 async function getInvoiceData(request: Request) {
-    const sql = await get_sql()
+    // const sql = await get_sql()
     const res = await sql <Invoice[]>`select * from invoices`;
     return res
 }

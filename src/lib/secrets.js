@@ -5,12 +5,11 @@ import {
 
 export default async function get_DB_password() {
   const secret_name = process.env.PGSQL_CREDENTIALS;
-  console.debug(secret_name)
-  const region = 'eu-west-1'
+  console.debug(secret_name);
+  const region = "eu-west-1";
   const client = new SecretsManagerClient({
     region: region,
   });
-  console.debug(client)
   let response;
   try {
     response = await client.send(
@@ -25,6 +24,6 @@ export default async function get_DB_password() {
     console.error(error);
     return null;
   }
-  const password = JSON.parse(response.SecretString).password
-  return password
+  const password = JSON.parse(response.SecretString).password;
+  return password;
 }

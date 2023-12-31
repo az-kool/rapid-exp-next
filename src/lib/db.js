@@ -27,7 +27,6 @@ async function prepare_config() {
   return config
 }
 const config = await prepare_config()
-console.log(config)
 const sql = postgres(config)
 
 export default sql
